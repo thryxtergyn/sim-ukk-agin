@@ -26,31 +26,22 @@
              </div>
 </form>
 <?php
- include '../config/koneksi.php';
- $tanggal = date("Y-m-d");
- if (isset($_POST['kirim'])) {
-    $nik = $_SESSION['nik'];
-    $judul_laporan = $_POST['judul_laporan'];
-    $isi_laporan = $_POST['isi_laporan'];
-    $status = 0;
-    $foto = $_FILES['foto']['name'];
-    $tmp = $_FILES['foto']['tmp_name'];
-    $lokasi = '../assets/img';
-    $nama_foto = rand(0,999).'-'.$foto;
+include '../config/koneksi.php';
+$tanggal = date("Y-m-d");
+if (isset($_POST['kirim'])) {
+$nik = $_SESSION['nik'];
+$judul_laporan = $_POST['judul_laporan'];
+$isi_laporan = $_POST['isi_laporan'];
+$foto = $_FILES['foto'];
+$status = 0;
 
-    move_uploaded_file($tmp, $lokasi, $nama_foto);
-    $query = mysqli_query($koneksi, "INSERT INTO pengaduan VALUES ('','$tanggal','$nik','$judul_laporan','$isi_laporan','$nama_foto','$status')");
-    
+$query = mysqli_query($koneksi, "INSERT INTO pengaduan VALUES ('','','$nik','$judul_laporan','$isi_laporan','$foto','$status')");
+
 echo " <script>
 alert('Data berhasil dikirim!');
 window.location='index.php';
 </script>
-";
-
- }
-
-
-
+";}
 ?>
 
 </div>
